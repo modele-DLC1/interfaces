@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Convertisseur Z → A & B</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+	<header>
+	  <h1>Convertisseur – Modèle DLC1</h1>
+	  <p>Les calculs sont effectués automatiquement selon le modèle DLC1,<br>
+		 développé par Louise Bodin d'après les théories de Daniel Louis Cerizay.</p>
+	</header>
+
+  <div class="tabs">
+    <button onclick="switchTab('simple')">Interface Simple</button>
+    <button onclick="switchTab('avancee')">Interface Avancée</button>
+  </div>
+
+  <div id="simple" class="tab-content active">
+  <h2>Interface Simple</h2>
+
+  <p><strong>1 - Choisir le taux d'expansion à utiliser<br>
+  2 - Entrer une valeur pour le z observé<br>
+  3 - Le logiciel calculera le rayon de la sphère d’émission</strong></p>
+  
+  <table id="simple-table">
+    <tr class="section-yellow">
+      <td>Taux d’expansion :</td>
+      <td><input type="number" id="expansion-simple" value="71" step="0.01" oninput="calculSimple()" /></td>
+      <td>km/s/Mpc</td>
+    </tr>
+    <tr class="section-green">
+      <td>z observé :</td>
+      <td><input type="number" id="z-simple" value="0" step="0.01" oninput="calculSimple()" /></td>
+      <td></td>
+    </tr>
+    <tr class="section-orange">
+      <td>Rayon de la sphère d’émission :</td>
+      <td><input type="text" id="a-simple" readonly /></td>
+      <td>année-lumière</td>
+    </tr>
+  </table>
+</div>
+
+
+  <div id="avancee" class="tab-content hidden">
+  <h2>Interface Avancée</h2>
+
+  <p><strong>1 - Choisir le taux d'expansion à utiliser<br>
+  2 - Entrer une valeur pour l’un des 10 paramètres<br>
+  3 - Le logiciel calculera les 9 autres</strong></p>
+
+  <table id="inputs-table">
+    <!-- Section orange -->
+    <tr class="spacer"></tr>
+    <tr class="section-orange">
+      <td>Température ambiante actuelle</td>
+      <td><input type="text" id="temp_actuelle" value="2.725" readonly /></td>
+      <td>k</td>
+    </tr>
+    <tr class="section-orange">
+      <td>Longueur d'onde hydrogène Hα</td>
+      <td><input type="text" id="lambHa" value="6.56E-07" readonly /></td>
+      <td>mètre</td>
+    </tr>
+    <tr class="section-orange">
+      <td>Longueur d'onde carbone [III]</td>
+      <td><input type="text" id="lambC" placeholder="..." readonly /></td>
+      <td>mètre</td>
+    </tr>
+
+    <!-- Section jaune -->
+    <tr class="spacer"></tr>
+    <tr class="section-yellow">
+      <td><strong>TAUX D’EXPANSION</strong></td>
+      <td><input type="number" id="expansion" value="71.00" oninput="handleInput('expansion')" step="0.01" /></td>
+      <td><strong>km/s/Mpc</strong></td>
+    </tr>
+
+    <!-- Section verte -->
+    <tr class="spacer"></tr>
+    <tr class="section-green">
+      <td>z observé</td>
+      <td><input type="number" id="z" oninput="handleInput('z')" value="11.09" /></td>
+      <td></td>
+    </tr>
+    <tr class="section-green">
+      <td>z expansionniste</td>
+      <td><input type="number" id="zexp" oninput="handleInput('zexp')" value="0.986410905" /></td>
+      <td></td>
+    </tr>
+    <tr class="section-green">
+      <td>Vitesse de récession</td>
+      <td><input type="number" id="Vrec" oninput="handleInput('Vrec')" value="295718000" /></td>
+      <td>km/s</td>
+    </tr>
+    <tr class="section-green">
+      <td>Distance de l'émetteur en année-lumière</td>
+      <td><input type="number" id="Ra" oninput="handleInput('Ra')" value="13584339452" /></td>
+      <td>A.-L.</td>
+    </tr>
+    <tr class="section-green">
+      <td>Distance de l'émetteur en Mpc</td>
+      <td><input type="number" id="Rm" oninput="handleInput('Rm')" value="4165.05" /></td>
+      <td>Mpc</td>
+    </tr>
+    <tr class="section-green">
+      <td>Âge du KAOsmos au moment de l’émission</td>
+      <td><input type="number" id="T" oninput="handleInput('T')" value="732785643611" /></td>
+      <td>ans</td>
+    </tr>
+    <tr class="section-green">
+      <td>L’émission des photons a eu lieu il y a</td>
+      <td><input type="number" id="x" oninput="handleInput('x')" value="188425147" /></td>
+      <td>ans</td>
+    </tr>
+    <tr class="section-green">
+      <td>Fréquence mesurée</td>
+      <td><input type="number" id="f" oninput="handleInput('f')" value="37782635617101" /></td>
+      <td>Hz</td>
+    </tr>
+    <tr class="section-green">
+      <td>Longueur d’onde mesurée</td>
+      <td><input type="number" id="lambda" oninput="handleInput('lambda')" value="0.000000793466" /></td>
+      <td>mètre</td>
+    </tr>
+    <tr class="section-green">
+      <td>Température ambiante lors de l’émission</td>
+      <td><input type="number" id="temp" oninput="handleInput('temp')" value="2.801" /></td>
+      <td>k</td>
+    </tr>
+  </table>
+</div>
+
+
+
+  <script src="script.js"></script>
+</body>
+</html>
