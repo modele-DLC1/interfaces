@@ -12,20 +12,9 @@ function switchTab(tab) {
 }
 
 // Interface Simple : Z → A et B
-function calculSimple() {
-  const z = parseFloat(document.getElementById("z-simple").value) || 0;
-  const H = parseFloat(document.getElementById("expansion-simple").value) || 71;
 
-  const c = 299792.458;
-  const L = 30856775814913711000;
 
-  const num = c * (((z + 1) ** 2 - 1));
-  const den = ((z + 1) ** 2 + 1);
 
-  const result_km = ((num / den) * L / H)/(c * 31558150 ) ;
-
-  document.getElementById("a-simple").value = result_km.toExponential(6);
-}
 
 
 // Interface Avancée : calculs bidirectionnels
@@ -47,11 +36,25 @@ function handleInput(type) {
 
   const result = calculerDepuis(type, value);
 
-  for (const key in result) {
-    if (key !== type && document.getElementById(key)) {
-      document.getElementById(key).value = result[key].toFixed(6);
-    }
-  }
+  const formatEntier = ["T", "x","Ra","f"]; // champs sans virgule
+  const formatDeuxDecimales = ["Vrec", "Rm", "temp"];
+  const formatSixDecimales = ["z", "zexp", "lambda"];
+
+	for (const key in result) {
+	  const input = document.getElementById(key);
+	  if (key !== type && input) {
+		if (formatEntier.includes(key)) {
+		  input.value = Math.round(result[key]);
+		} else if (formatDeuxDecimales.includes(key)) {
+		  input.value = result[key].toFixed(3);
+		} else if (formatSixDecimales.includes(key)) {
+		  input.value = result[key].toFixed(6);
+		} else {
+		  input.value = result[key]; // format par défaut
+		}
+	  }
+}
+
 }
 function calculerDepuis(typ, val) {
   let z, zexp, Vrec, Ri, Ra, Rm, te, T, x, f, lambda, V, temp;
