@@ -38,8 +38,8 @@ function handleInput(type) {
 
   const formatEntier = ["T", "x","Ra","f"]; // champs sans virgule
   const formatDeuxDecimales = ["Vrec", "Rm", "temp"];
-  const formatSixDecimales = ["z", "zexp", "lambda"];
-
+  const formatSixDecimales = ["z", "zexp"];
+  const formatNeufDecimales = ["lambda"];
 	for (const key in result) {
 	  const input = document.getElementById(key);
 	  if (key !== type && input) {
@@ -49,6 +49,8 @@ function handleInput(type) {
 		  input.value = result[key].toFixed(3);
 		} else if (formatSixDecimales.includes(key)) {
 		  input.value = result[key].toFixed(6);
+		} else if (formatNeufDecimales.includes(key)) {
+		  input.value = result[key].toFixed(9);
 		} else {
 		  input.value = result[key]; // format par défaut
 		}
