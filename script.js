@@ -20,6 +20,7 @@ function switchTab(tab) {
 // Interface Avancée : calculs bidirectionnels
 // script.js
 
+
 // Constantes physiques
 const c = 299792.458;
 const L = 30856775814913711000;
@@ -43,17 +44,19 @@ function handleInput(type) {
 	for (const key in result) {
 	  const input = document.getElementById(key);
 	  if (key !== type && input) {
+		let val
 		if (formatEntier.includes(key)) {
-		  input.value = Math.round(result[key]);
+		  val = Math.round(result[key]);
 		} else if (formatDeuxDecimales.includes(key)) {
-		  input.value = result[key].toFixed(3);
+		  val = result[key].toFixed(3);
 		} else if (formatSixDecimales.includes(key)) {
-		  input.value = result[key].toFixed(6);
+		  val = result[key].toFixed(6);
 		} else if (formatNeufDecimales.includes(key)) {
-		  input.value = result[key].toFixed(9);
+		  val = result[key].toFixed(9);
 		} else {
-		  input.value = result[key]; // format par défaut
+		  val = result[key]; // format par défaut
 		}
+		input.value = val
 	  }
 }
 
@@ -198,6 +201,7 @@ function calculerDepuis(typ, val) {
   }
   if (f === undefined && lambda !== undefined) {
     f = c * 1e3 / lambda;
+
   }
 
   // 8) V  
@@ -210,5 +214,5 @@ function calculerDepuis(typ, val) {
     temp = 2.725 * Math.pow(V2 / V, 2 / 3);
   }
 
-  return { z, zexp, Vrec, Ri, Ra, Rm, te, T, x, f, lambda, V, temp };
+  return { z, zexp, Vrec, Ri, Ra, Rm, te, f, lambda, V, temp };
 }
